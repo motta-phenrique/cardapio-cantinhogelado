@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  --font-sans: var(--font-nunito);
+  --font-heading: var(--font-fredoka);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  /* cores extras da marca */
+  --color-brand-pink: var(--brand-pink);
+  --color-acai: var(--acai);
+  --color-acai-foreground: var(--acai-foreground);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Paleta Cantinho Gelado: creme, rosa, chocolate, amarelo e roxo-açaí */
+:root {
+  --radius: 1rem;
+  --background: #fff8ee;
+  --foreground: #4a2c2a;
+  --card: #ffffff;
+  --card-foreground: #4a2c2a;
+  --popover: #ffffff;
+  --popover-foreground: #4a2c2a;
+  --primary: #d12f66; /* rosa (versão AA para texto branco) */
+  --primary-foreground: #ffffff;
+  --secondary: #4a2c2a; /* chocolate */
+  --secondary-foreground: #fff8ee;
+  --muted: #fce4ec; /* rosa clarinho */
+  --muted-foreground: #7a5350;
+  --accent: #f5c242; /* amarelo */
+  --accent-foreground: #4a2c2a;
+  --destructive: #b42318;
+  --border: #f3d3dc;
+  --input: #ebc3cf;
+  --ring: #5b2a6e;
+  --brand-pink: #e8457a;
+  --acai: #5b2a6e;
+  --acai-foreground: #ffffff;
+  --whatsapp: #128c7e;
+  --whatsapp-foreground: #ffffff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1, h2, h3 {
+    @apply font-heading;
+  }
+}
