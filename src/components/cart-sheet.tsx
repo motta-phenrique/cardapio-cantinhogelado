@@ -59,12 +59,16 @@ export function CartSheet() {
     if (Object.keys(e).length) return toast.error("Confira os campos destacados.")
 
     const checkout: Checkout = { ...form, type, payment: form.payment as Checkout["payment"], change }
-    window.open(whatsappUrl(STORE.whatsapp, buildMessage(STORE.name, items, checkout, STORE.delivery)), "_blank", "noopener")
+    const url = whatsappUrl(STORE.whatsapp, buildMessage(STORE.name, items, checkout, STORE.delivery))
+    window.open(url, "_blank", "noopener")
+    // pedido saiu: esvazia o carrinho (e o localStorage). O link fica no toast caso o WhatsApp não abra.
+    cart.clear()
+    setForm((f) => ({ ...f, change: "", notes: "" }))
     setOpen(false)
     toast.success("Pedido enviado para o WhatsApp!", {
       description: "É só confirmar o envio na conversa.",
-      duration: 10000,
-      action: { label: "Limpar carrinho", onClick: cart.clear },
+      duration: 15000,
+      action: { label: "Reenviar", onClick: () => window.open(url, "_blank", "noopener") },
     })
   }
 

@@ -24,6 +24,8 @@ export type Product = {
   flavors?: FlavorChoice
   /** aceita a lista de ADDONS */
   addons?: boolean
+  /** `false` esconde o campo "Observação" no pedido */
+  note?: boolean
 }
 
 export type Category = {
@@ -101,9 +103,10 @@ export const MENU: Category[] = [
       {
         id: "milkshake",
         name: "Milk Shake",
-        description: "Escolha o sabor e o tamanho.",
+        description: "Escolha o sabor, o tamanho e os adicionais.",
         image: "/images/webp/milkshake.webp",
         flavors: { source: "milkshake", max: 1 },
+        addons: true,
         sizes: [
           { id: "300", label: "300ml", price: 1500 },
           { id: "400", label: "400ml", price: 1700 },
@@ -117,10 +120,10 @@ export const MENU: Category[] = [
     name: "Picolés",
     emoji: "🍡",
     products: [
-      { id: "picole-frutas", name: "Picolé de Frutas", image: "/images/webp/picole-frutas.webp", price: 200, flavors: { source: "livre", max: 1 } },
-      { id: "picole-leite", name: "Picolé de Leite", image: "/images/webp/picole-leite.webp", price: 300, flavors: { source: "livre", max: 1 } },
-      { id: "picole-especial", name: "Picolé Especial", image: "/images/webp/picole-especial.webp", price: null, flavors: { source: "livre", max: 1 } },
-      { id: "moreninha", name: "Moreninha", image: "/images/webp/moreninha.webp", price: 600 },
+      { id: "picole-frutas", name: "Picolé de Frutas", image: "/images/webp/picole-frutas.webp", price: 200, flavors: { source: "livre", max: 1 }, note: false },
+      { id: "picole-leite", name: "Picolé de Leite", image: "/images/webp/picole-leite.webp", price: 300, flavors: { source: "livre", max: 1 }, note: false },
+      { id: "picole-especial", name: "Picolé Especial", image: "/images/webp/picole-especial.webp", price: null, flavors: { source: "livre", max: 1 }, note: false },
+      { id: "moreninha", name: "Moreninha", image: "/images/webp/moreninha.webp", price: 600, note: false },
     ],
   },
   {
@@ -128,7 +131,7 @@ export const MENU: Category[] = [
     name: "Potes",
     emoji: "🧊",
     products: [
-      { id: "pote-2l", name: "Pote de Sorvete 2L", description: "Para levar a família toda.", image: "/images/webp/pote-2l.webp", price: 3990, flavors: { source: "sorvete", max: 1 } },
+      { id: "pote-2l", name: "Pote de Sorvete 2L", description: "Para levar a família toda. Escreva os sabores que deseja.", image: "/images/webp/pote-2l.webp", price: 3990, flavors: { source: "livre", max: 1 }, note: false },
     ],
   },
 ]

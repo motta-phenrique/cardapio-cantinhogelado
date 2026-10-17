@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Separator } from "@/components/ui/separator"
@@ -135,8 +134,8 @@ function ProductForm({ product, onDone }: { product: Product; onDone: () => void
 
       {choice?.source === "livre" && (
         <div className="space-y-2">
-          <Label htmlFor="free-flavor">Sabor (opcional)</Label>
-          <Input id="free-flavor" value={freeFlavor} onChange={(e) => setFreeFlavor(e.target.value)} placeholder="Ex.: uva, coco..." />
+          <Label htmlFor="free-flavor">Sabores</Label>
+          <Textarea id="free-flavor" value={freeFlavor} onChange={(e) => setFreeFlavor(e.target.value)} placeholder="Escreva os sabores que você quer" />
         </div>
       )}
 
@@ -158,10 +157,12 @@ function ProductForm({ product, onDone }: { product: Product; onDone: () => void
         </fieldset>
       )}
 
-      <div className="space-y-2">
-        <Label htmlFor="item-note">Observação</Label>
-        <Textarea id="item-note" value={note} onChange={(e) => setNote(e.target.value)} placeholder="Ex.: sem granola, caprichar na calda..." />
-      </div>
+      {product.note !== false && (
+        <div className="space-y-2">
+          <Label htmlFor="item-note">Observação</Label>
+          <Textarea id="item-note" value={note} onChange={(e) => setNote(e.target.value)} placeholder="Ex.: sem granola, caprichar na calda..." />
+        </div>
+      )}
 
       <Separator />
 
