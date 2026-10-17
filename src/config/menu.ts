@@ -39,7 +39,7 @@ export const ADDONS: Addon[] = [
   { id: "creme-leitinho", name: "Creme de Leitinho", price: 450 },
   { id: "creme-avela", name: "Creme de Avelã", price: 450 },
   { id: "mais-fruta", name: "Mais fruta", price: 300 },
-  { id: "granola", name: "Granola", price: null },
+  { id: "granola", name: "Granola", price: 300 },
   { id: "amendoim", name: "Amendoim", price: 200 },
   { id: "creme-amendoim", name: "Creme de Amendoim", price: 300 },
 ]

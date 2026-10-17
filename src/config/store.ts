@@ -1,8 +1,8 @@
 export const STORE = {
   name: "Cantinho Gelado",
   slogan: "O sabor que refresca seu dia!",
-  /** formato 55DDDNUMERO, só dígitos. Definido em .env.local */
-  whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").replace(/\D/g, ""),
+  /** formato 55DDDNUMERO, só dígitos. Pode ser sobrescrito por NEXT_PUBLIC_WHATSAPP_NUMBER */
+  whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5543999179636").replace(/\D/g, ""),
   hours: "Quarta a domingo, das 14h às 21h",
   delivery: {
     /** taxa em centavos, cobrada quando o subtotal fica abaixo de freeFrom */
