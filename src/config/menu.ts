@@ -7,9 +7,11 @@ export type Addon = { id: string; name: string; price: number | null }
 
 export type FlavorChoice = {
   /** "sorvete" e "milkshake" usam a lista de src/config/flavors.ts; "livre" é campo de texto opcional */
-  source: "sorvete" | "milkshake" | "livre"
+  source: "sorvete" | "milkshake" | "fruta" | "livre"
   /** quantos sabores o cliente pode escolher */
   max: number
+  /** título do campo (padrão: "Sabor"/"Sabores") */
+  label?: string
 }
 
 export type Product = {
@@ -37,7 +39,7 @@ export type Category = {
 
 export const ADDONS: Addon[] = [
   { id: "ovomaltine", name: "Ovomaltine", price: 300 },
-  { id: "nutella", name: "Nutella", price: null },
+  { id: "nutella", name: "Nutella", price: 500 },
   { id: "creme-leitinho", name: "Creme de Leitinho", price: 450 },
   { id: "creme-avela", name: "Creme de Avelã", price: 450 },
   { id: "mais-fruta", name: "Mais fruta", price: 300 },
@@ -55,8 +57,9 @@ export const MENU: Category[] = [
       {
         id: "acai",
         name: "Açaí",
-        description: "Açaí cremoso no copo. Monte do seu jeito com adicionais.",
+        description: "Açaí cremoso no copo. Já vem com leite condensado, leite em pó e uma fruta à sua escolha (morango ou banana) — ou sem fruta.",
         image: "/images/webp/acai.webp",
+        flavors: { source: "fruta", max: 1, label: "Fruta" },
         addons: true,
         sizes: [
           { id: "300", label: "300ml", price: 1600 },
@@ -85,16 +88,16 @@ export const MENU: Category[] = [
       },
     ],
   },
-  {
-    id: "sorvetes",
-    name: "Sorvetes",
-    emoji: "🍦",
-    products: [
-      { id: "casquinha-1", name: "Casquinha com 1 bola", image: "/images/webp/casquinha.webp", price: 600, flavors: { source: "sorvete", max: 1 } },
-      { id: "cascao-1", name: "Cascão com 1 bola", image: "/images/webp/cascao-1-bola.webp", price: 800, flavors: { source: "sorvete", max: 1 } },
-      { id: "cascao-2", name: "Cascão com 2 bolas", description: "Escolha até 2 sabores.", image: "/images/webp/cascao-2-bolas.webp", price: 1200, flavors: { source: "sorvete", max: 2 } },
-    ],
-  },
+  // {
+  //   id: "sorvetes",
+  //   name: "Sorvetes",
+  //   emoji: "🍦",
+  //   products: [
+  //     { id: "casquinha-1", name: "Casquinha com 1 bola", image: "/images/webp/casquinha.webp", price: 600, flavors: { source: "sorvete", max: 1 } },
+  //     { id: "cascao-1", name: "Cascão com 1 bola", image: "/images/webp/cascao-1-bola.webp", price: 800, flavors: { source: "sorvete", max: 1 } },
+  //     { id: "cascao-2", name: "Cascão com 2 bolas", description: "Escolha até 2 sabores.", image: "/images/webp/cascao-2-bolas.webp", price: 1200, flavors: { source: "sorvete", max: 2 } },
+  //   ],
+  // },
   {
     id: "milkshake",
     name: "Milk Shake",
@@ -132,6 +135,27 @@ export const MENU: Category[] = [
     emoji: "🧊",
     products: [
       { id: "pote-2l", name: "Pote de Sorvete 2L", description: "Para levar a família toda. Escreva os sabores que deseja.", image: "/images/webp/pote-2l.webp", price: 3990, flavors: { source: "livre", max: 1 }, note: false },
+    ],
+  },
+  {
+    id: "bebidas",
+    name: "Bebidas",
+    emoji: "🧃",
+    products: [
+      { id: "coca-zero", name: "Coca-Cola Sem Açúcar", description: "Lata 350ml", image: "/images/webp/coca-zero.webp", price: 500, note: false },
+      { id: "coca-cola", name: "Coca-Cola", description: "Lata 350ml", image: "/images/webp/coca-cola.webp", price: 500, note: false },
+      { id: "coca-pet", name: "Coca-Cola Pet", description: "200ml", image: "/images/webp/coca-pet.webp", price: 300, note: false },
+      { id: "crystal-com-gas", name: "Água Crystal com Gás", description: "500ml", image: "/images/webp/crystal-com-gas.webp", price: 300, note: false },
+      { id: "crystal-sem-gas", name: "Água Crystal sem Gás", description: "500ml", image: "/images/webp/crystal-sem-gas.webp", price: 300, note: false },
+      { id: "del-valle-pessego", name: "Del Valle Pêssego", description: "290ml", image: "/images/webp/del-valle-pessego.webp", price: 600, note: false },
+      { id: "del-valle-uva", name: "Del Valle Uva", description: "290ml", image: "/images/webp/del-valle-uva.webp", price: 600, note: false },
+      { id: "fanta-laranja", name: "Fanta Laranja", description: "Lata 350ml", image: "/images/webp/fanta-laranja.webp", price: 500, note: false },
+      { id: "fanta-uva", name: "Fanta Uva", description: "Lata 350ml", image: "/images/webp/fanta-uva.webp", price: 500, note: false },
+      { id: "ice-tea-limao", name: "Ice Tea Limão Zero", description: "290ml", image: "/images/webp/ice-tea-limao.webp", price: 500, note: false },
+      { id: "monster", name: "Monster Energy", description: "473ml", image: "/images/webp/monster.webp", price: 1200, note: false },
+      { id: "powerade", name: "Powerade", description: "500ml", image: "/images/webp/powerade.webp", price: 600, note: false },
+      { id: "sprite-fresh", name: "Sprite Fresh Limão", description: "Pet 510ml", image: "/images/webp/sprite-fresh.webp", price: 499, note: false },
+      { id: "sprite", name: "Sprite Original", description: "Lata 350ml", image: "/images/webp/sprite.webp", price: 500, note: false },
     ],
   },
 ]

@@ -10,7 +10,7 @@ const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito", display: 
 const description = `Cardápio digital da ${STORE.name}: açaí, milk shakes, sorvetes, picolés e potes. Monte seu pedido e envie pelo WhatsApp.`
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://cardapio-cantinhogelado.vercel.app"),
   title: `${STORE.name} | Cardápio e pedidos`,
   description,
   openGraph: {

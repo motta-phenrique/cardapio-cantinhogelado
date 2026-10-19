@@ -19,4 +19,6 @@ export const FLAVORS = {
   sorvete: SABORES,
   /** milk shake: mesmos sabores dos sorvetes (troque por outra lista se um dia forem diferentes) */
   milkshake: SABORES,
+  /** fruta que acompanha o açaí */
+  fruta: ["Morango", "Banana", "Sem fruta"],
 }

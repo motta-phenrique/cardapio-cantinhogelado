@@ -102,7 +102,7 @@ function ProductForm({ product, onDone }: { product: Product; onDone: () => void
       {list && choice && (
         <fieldset className="space-y-2">
           <legend className="mb-2 font-heading font-semibold">
-            {choice.max === 1 ? "Sabor" : `Sabores (até ${choice.max})`}
+            {choice.label ?? (choice.max === 1 ? "Sabor" : `Sabores (até ${choice.max})`)}
           </legend>
           {choice.max === 1 ? (
             <RadioGroup value={flavors[0] ?? ""} onValueChange={(v) => setFlavors([v])} className="grid grid-cols-2 gap-2">
@@ -128,7 +128,7 @@ function ProductForm({ product, onDone }: { product: Product; onDone: () => void
               ))}
             </div>
           )}
-          {missingFlavor && <p className="text-xs text-muted-foreground">Escolha pelo menos 1 sabor.</p>}
+          {missingFlavor && <p className="text-xs text-muted-foreground">Escolha uma opção.</p>}
         </fieldset>
       )}
 
