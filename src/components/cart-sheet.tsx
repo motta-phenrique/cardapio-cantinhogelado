@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { MinusIcon, PlusIcon, ShoppingBagIcon, Trash2Icon } from "lucide-react"
+import { ChevronRightIcon, MinusIcon, PlusIcon, ShoppingBagIcon, Trash2Icon } from "lucide-react"
 import { toast } from "sonner"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -73,6 +73,24 @@ export function CartSheet() {
   }
 
   return (
+    <>
+    {/* barra fixa "Finalizar pedido" quando há itens; deixa o canto direito livre para o botão do WhatsApp */}
+    {count > 0 && !open && (
+      <Button
+        size="lg"
+        onClick={() => onOpenChange(true)}
+        className="fixed bottom-4 left-4 right-22 z-30 h-14 justify-between rounded-full px-5 text-base shadow-xl sm:right-auto sm:w-96"
+      >
+        <span className="flex items-center gap-2">
+          <ShoppingBagIcon className="size-5" aria-hidden />
+          Finalizar pedido
+          <Badge className="bg-accent text-accent-foreground">{count}</Badge>
+        </span>
+        <span className="flex items-center gap-1 font-heading font-semibold">
+          {brl(subtotal)} <ChevronRightIcon className="size-5" aria-hidden />
+        </span>
+      </Button>
+    )}
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
         <Button variant="secondary" size="lg" className="relative rounded-full" aria-label={`Abrir carrinho, ${count} ${count === 1 ? "item" : "itens"}`}>
@@ -210,6 +228,7 @@ export function CartSheet() {
         )}
       </SheetContent>
     </Sheet>
+    </>
   )
 }
 
