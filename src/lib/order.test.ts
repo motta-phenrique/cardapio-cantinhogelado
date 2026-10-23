@@ -8,7 +8,7 @@ const items: CartItem[] = [
   { id: "b", name: "Cascão com 2 bolas", flavors: ["Chocolate", "Morango"], addons: [], note: "", unitPrice: 1200, qty: 1 },
 ]
 
-const delivery = { fee: 500, freeFrom: 5000, days: [6, 0] }
+const delivery = { fee: 500, freeFrom: 5000, days: { 5: 18, 6: 0, 0: 0 } }
 
 test("totais e taxa de entrega", () => {
   assert.deepEqual(totals(items, "entrega", delivery), { subtotal: 6600, fee: 0, total: 6600 }) // >= R$ 50: grátis
@@ -21,7 +21,10 @@ test("totais e taxa de entrega", () => {
 test("dias de entrega no horário de Brasília", () => {
   assert.equal(isDeliveryDay(delivery, new Date("2026-10-17T15:00:00-03:00")), true) // sábado
   assert.equal(isDeliveryDay(delivery, new Date("2026-10-18T20:00:00-03:00")), true) // domingo
-  assert.equal(isDeliveryDay(delivery, new Date("2026-10-16T20:00:00-03:00")), false) // sexta
+  assert.equal(isDeliveryDay(delivery, new Date("2026-10-16T17:59:00-03:00")), false) // sexta antes das 18h
+  assert.equal(isDeliveryDay(delivery, new Date("2026-10-16T18:00:00-03:00")), true) // sexta 18h
+  assert.equal(isDeliveryDay(delivery, new Date("2026-10-15T20:00:00-03:00")), false) // quinta
+  assert.equal(isDeliveryDay(delivery, new Date("2026-10-17T00:30:00-03:00")), true) // sábado madrugada
   assert.equal(isDeliveryDay(delivery, new Date("2026-10-19T01:00:00Z")), true) // domingo 22h em Brasília, segunda em UTC
 })
 

@@ -169,7 +169,7 @@ export function CartSheet() {
                     <p id="delivery-info" className="text-xs text-muted-foreground">
                       {deliveryToday
                         ? `Entrega grátis a partir de ${brl(STORE.delivery.freeFrom)}. Abaixo disso, taxa de ${brl(STORE.delivery.fee)}.`
-                        : `${STORE.delivery.label}. Hoje, só retirada na loja.`}
+                        : `${STORE.delivery.label}. No momento, só retirada na loja.`}
                     </p>
                   </fieldset>
 

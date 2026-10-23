@@ -33,7 +33,8 @@ export function parseMoney(input: string): number | null {
   return clean && Number.isFinite(n) ? Math.round(n * 100) : null
 }
 
-export type Delivery = { fee: number; freeFrom: number; days: number[] }
+/** days: dia da semana (0 = domingo) → hora a partir da qual aceita entrega */
+export type Delivery = { fee: number; freeFrom: number; days: Record<number, number> }
 
 export function totals(items: CartItem[], type: Checkout["type"], d: Delivery) {
   const subtotal = items.reduce((sum, i) => sum + i.unitPrice * i.qty, 0)
@@ -42,10 +43,15 @@ export function totals(items: CartItem[], type: Checkout["type"], d: Delivery) {
 }
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-const weekdayBR = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "America/Sao_Paulo" })
+const nowBR = new Intl.DateTimeFormat("en-US", { weekday: "short", hour: "numeric", hourCycle: "h23", timeZone: "America/Sao_Paulo" })
 
-/** Hoje (no horário de Brasília) tem entrega? */
-export const isDeliveryDay = (d: Delivery, now = new Date()) => d.days.includes(WEEKDAYS.indexOf(weekdayBR.format(now)))
+/** Agora (no horário de Brasília) aceita entrega? */
+export function isDeliveryDay(d: Delivery, now = new Date()) {
+  const parts = nowBR.formatToParts(now)
+  const part = (t: string) => parts.find((p) => p.type === t)!.value
+  const from = d.days[WEEKDAYS.indexOf(part("weekday"))]
+  return from !== undefined && Number(part("hour")) >= from
+}
 
 const PAYMENT = { pix: "Pix", dinheiro: "Dinheiro", cartao: "Cartão" }
 

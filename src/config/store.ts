@@ -9,8 +9,8 @@ export const STORE = {
     fee: 500,
     /** entrega grátis a partir deste subtotal (centavos) */
     freeFrom: 5000,
-    /** dias com entrega (0 = domingo ... 6 = sábado); nos outros dias, só retirada */
-    days: [6, 0],
-    label: "Entregas aos sábados e domingos",
+    /** dia com entrega (0 = domingo ... 6 = sábado) → a partir de que hora; fora disso, só retirada */
+    days: { 5: 18, 6: 0, 0: 0 },
+    label: "Entregas sexta a partir das 18h, sábado e domingo",
   },
 }
